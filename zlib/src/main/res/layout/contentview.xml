@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.zhy.zlib.view.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        app:CT=" 我来了 "
+        app:isFinish="true"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1" />
+
+    <com.zhy.zlib.view.SelectBar
+        android:layout_width="match_parent"
+        app:Text="首页|发现|我的"
+        app:isBottomTab="true"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

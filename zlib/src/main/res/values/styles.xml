@@ -1,0 +1,71 @@
+<resources>
+
+    <style name="DialogStyleBottom" parent="android:Theme.Dialog">
+        <!--<item name="android:windowAnimationStyle">@style/AnimBottom</item>-->
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+
+    <style name="DialogStyleBottom1" parent="android:Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+    <!-- 自定义dialog进入和退出的动画 -->
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
+    </style>
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--自定义加载dialog-->
+    <style name="loading_dialog" parent="@android:style/Theme.Dialog" >
+        <item name="android:windowFrame">@null</item><!--边框-->
+
+        <item
+            name="android:windowIsFloating">true
+        </item><!--是否浮现在activity之上-->
+
+        <item
+            name="android:windowIsTranslucent">false
+        </item><!--半透明-->
+
+        <item name="android:windowNoTitle">true</item>
+
+        <item
+            name="android:background">@android:color/transparent
+        </item>
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item
+            name="android:backgroundDimEnabled">true
+        </item><!--模糊-->
+    </style>
+    <declare-styleable name="ImageViewCard">
+        <attr name="src" format="reference" />
+    </declare-styleable>
+
+</resources>

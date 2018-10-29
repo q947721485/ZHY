@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlue">#5B5EE4</color>
+    <color name="colorRed">#C52A35</color>
+    <color name="colorYellow">#FFD800</color>
+    <color name="colorLightRed">#D2433F</color>
+    <color name="c_ffecefff">#ECEFFF</color>
+    <color name="c_ff5300">#ff5300</color>
+
+    <color name="c_ff333333">#FF333333</color>
+    <color name="c_ffa3a3a3">#FFa3a3a3</color>
+    <color name="c_ff666666">#FF666666</color>
+    <color name="c_ff999999">#FF999999</color>
+    <color name="c_fff3f3f3">#FFF3F3F3</color>
+    <color name="c_home_title">#FF5B5EE4</color>
+    <color name="c_ff5b5e44">#FF5B5EE4</color>
+    <color name="c_fff5f7ff">#FFF5F7FF</color>
+    <color name="c_ffe0e0e0">#FFE0E0E0</color>
+    <color name="c_500000">#50000000</color>
+    <color name="c_ffcccccc">#FFCCCCCC</color>
+    <color name="c_ffe5e5e5">#FFE5E5E5</color>
+    <color name="c_ffe05962">#FFE05962</color>
+    <color name="c_08B9FB">#08B9FB</color>
+    <color name="c_ff919af7">#ff919af7</color>
+    <color name="c_ff575add">#FF575ADD</color>
+    <color name="c_fff3707a">#FFF3707A</color>
+    <!--zxing-->
+    <color name="contents_text">#000000</color>
+    <color name="encode_view">#ffffff</color>
+    <color name="possible_result_points">#ffbd21</color>
+    <color name="result_minor_text">#c0c0c0</color>
+    <color name="result_points">#99cc00</color>
+    <color name="result_text">#ffffff</color>
+    <color name="result_view">#000000</color>
+    <color name="status_text">#ffffff</color>
+    <color name="viewfinder_mask">#50000000</color>
+    <color name="react">#ffffff</color>
+    <color name="scanLineColor">#ffffff</color>
+
+</resources>

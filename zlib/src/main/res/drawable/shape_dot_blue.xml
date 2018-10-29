@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:useLevel="false">
+    <!--背景-->
+    <solid android:color="@color/colorBlue" />
+    <!--边宽-->
+    <!--<stroke-->
+        <!--android:width="1.4dp"-->
+        <!--android:color="@color/cardview_dark_background" />-->
+
+    <!--图形大小-->
+    <size
+        android:width="4dp"
+        android:height="4dp" />
+</shape>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundAngleImageView">
+        <attr name="roundWidth" format="reference|dimension" />
+        <attr name="roundHeight" format="reference|dimension" />
+        <attr name="sideWidth" format="reference|dimension" />
+        <attr name="sideColor" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="TopBar">
+        <attr name="L1src" format="reference|color" />
+        <attr name="L2src" format="reference|color" />
+        <attr name="R1src" format="reference|color" />
+        <attr name="CSrc" format="reference|color" />
+        <attr name="R2src" format="reference|color" />
+        <attr name="CT" format="reference|string" />
+        <attr name="LT" format="reference|string" />
+        <attr name="RT" format="reference|string" />
+        <attr name="Tsize" format="dimension" />
+        <attr name="Tcolor" format="color" />
+        <attr name="ImgWidth" format="dimension" />
+        <attr name="isFinish" format="boolean" />
+        <attr name="isPlayer" format="boolean" />
+        <attr name="SelectTLineSrc" format="reference|color" />
+        <attr name="SelectTcolor" format="color" />
+        <attr name="SelectBGcolor" format="color" />
+        <attr name="SelectTsize" format="dimension" />
+        <attr name="SelectTsizeUn" format="dimension" />
+        <attr name="SelectTcolorUn" format="color" />
+        <attr name="SelectLongLine" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SelectBar">
+        <attr name="Text" format="reference|string" />
+        <attr name="LineSrc" format="reference|color" />
+        <attr name="Textsize" format="dimension" />
+        <attr name="TextsizeUn" format="dimension" />
+        <attr name="Textcolor" format="color" />
+        <attr name="TextcolorUn" format="color" />
+        <attr name="LongLine" format="boolean" />
+        <attr name="isBottomTab" format="boolean" />
+    </declare-styleable>
+
+
+</resources>
