@@ -16,8 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhy.zlib.Base.LibConfig;
 import com.zhy.zlib.R;
 import com.zhy.zlib.listener.TopListener;
+import com.zhy.zlib.utils.SelecteUtil;
 
 
 /**
@@ -25,7 +27,6 @@ import com.zhy.zlib.listener.TopListener;
  * 由 周洋 创建于 2016/10/26 下午3:07
  * 用途 :通用topbar
  */
-@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 public class TopBar extends RelativeLayout {
     private SelectBar selectBar;
     public ImageView L1, L2, R1, R2;
@@ -38,14 +39,12 @@ public class TopBar extends RelativeLayout {
         this(context, attrs, 0);
     }
 
-    private  boolean isPlayer;
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public TopBar(final Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         LinearLayout oldBar = new LinearLayout(context);
         if (getBackground() == null)
-            setBackgroundResource(R.color.colorBlue);
+            setBackgroundColor(LibConfig.colorTheme);
         final Drawable l1, l2, r1, r2, c, selectTline;
         float ts, iw, selectts, selecttsUn;
         LinearLayout.LayoutParams imglp, tvlp, ctvlp;
@@ -72,7 +71,6 @@ public class TopBar extends RelativeLayout {
         tc = t.getColor(R.styleable.TopBar_Tcolor, 0xffffffff);
         isLongLine = t.getBoolean(R.styleable.TopBar_SelectLongLine, false);
         isFinish = t.getBoolean(R.styleable.TopBar_isFinish, false);
-        isPlayer = t.getBoolean(R.styleable.TopBar_isPlayer, false);
         t.recycle();
 
         final LinearLayout left, leftClick, right, center;
@@ -120,7 +118,6 @@ public class TopBar extends RelativeLayout {
             String ltt[] = lt.split("\\|");
             if (ltt.length > 1) {
                 selectBar = new SelectBar(context);
-//                LogUtils.e("context==", getContext().getClass().getName());
                 for (int i = 0; i < ltt.length; i++) {
                     if (i == 0)
                         selectBar.addText(ltt[0], selectts, selecttc, selectTline, true, isLongLine, false);
@@ -189,7 +186,6 @@ public class TopBar extends RelativeLayout {
                 right.addView(selectBar, new LinearLayout.LayoutParams(0, dip2px(47), 1));
             } else {
                 RT = new TextView(context);
-//                RT.setTypeface(BaseApplication.getInstance().Bold);
                 RT.setText(rt);
                 RT.setGravity(Gravity.CENTER);
                 RT.setTextSize(TypedValue.COMPLEX_UNIT_PX, ts);
@@ -306,6 +302,12 @@ public class TopBar extends RelativeLayout {
 
     public void setTextSize(TextView textView, float textsize) {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, sp2px(textsize));
+    }
+
+    public void setSelectListener(SelecteUtil.Onselecte selectListener){
+        if (selectBar!=null){
+            selectBar.setOnselecte(selectListener);
+        }
     }
 
 }

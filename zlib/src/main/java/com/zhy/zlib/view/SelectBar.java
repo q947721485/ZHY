@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zhy.zlib.Base.LibConfig;
 import com.zhy.zlib.R;
 import com.zhy.zlib.utils.SelecteUtil;
 
@@ -34,7 +35,6 @@ public class SelectBar extends LinearLayout {
     public SelecteUtil slu;
     private Context mContext;
     LayoutParams itemlp, textlp, linelp, llp;
-    private boolean isBottomTab = false;
     List<TextView> tvs = new ArrayList<>();
     List<ImageView> lines = new ArrayList<>();
 
@@ -42,14 +42,14 @@ public class SelectBar extends LinearLayout {
         this(context, null);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public SelectBar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public SelectBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if (getBackground() == null)
+            setBackgroundColor(LibConfig.colorTheme);
         mContext = context;
         TypedArray t = context.obtainStyledAttributes(attrs,
                 R.styleable.SelectBar);
@@ -57,7 +57,7 @@ public class SelectBar extends LinearLayout {
         Drawable line;
         float tsUn, ts;
         int tc, tcUn;
-        boolean isLongLine;
+        boolean isLongLine, isBottomTab;
 
         line = t.getDrawable(R.styleable.SelectBar_LineSrc);
         ts = t.getDimension(R.styleable.SelectBar_Textsize, sp2px(14));//默认已选文字大小
@@ -79,12 +79,11 @@ public class SelectBar extends LinearLayout {
         }
         if (getBackground() == null)
             setBackgroundColor(0xff0d0d0d);
-        setSelect(tc, tcUn, ts, tsUn);
-        setGravity(Gravity.CENTER_VERTICAL);
-    }
 
-    public void setBottom() {
-        isBottomTab = true;
+        if (isBottomTab)
+            setSelect(tc, tcUn, ts, tsUn, isBottomTab);
+        else setSelect(tc, tcUn, ts, tsUn);
+        setGravity(Gravity.CENTER_VERTICAL);
     }
 
     public void setSelect(int selectColor, int selectUnColor, float ts, float tsUn) {
@@ -108,15 +107,32 @@ public class SelectBar extends LinearLayout {
         }, views).setSelectedClo(selectColor).setUnSelectedClo(selectUnColor).setSelectedTs(ts, tsUn);
     }
 
-    private Onselecte listener;
-
-    public SelecteUtil setOnselecte(Onselecte listener) {
-        this.listener = listener;
-        return slu;
+    public void setSelect(int selectColor, int selectUnColor, float ts, float tsUn, boolean isBottomTab) {
+        View[] views = new View[tvs.size() * 2];
+        if (tvs.size() > 0)
+            tvs.get(0).getPaint().setFakeBoldText(true);
+        for (int i = 0; i < tvs.size(); i++) {
+            views[i] = tvs.get(i);
+        }
+        for (int j = 0; j < lines.size(); j++) {
+            views[j + tvs.size()] = lines.get(j);
+        }
+        slu = new SelecteUtil(SelecteUtil.TEXT_IMG, new SelecteUtil.Onselecte() {
+            @Override
+            public boolean onselected(View v, int index) {
+                if (listener != null) {
+                    listener.onselected(v, index);
+                }
+                return true;
+            }
+        }, views).setSelectedClo(selectColor).setUnSelectedClo(selectUnColor).setSelectedTs(ts, tsUn);
     }
 
-    public interface Onselecte {
-        void onselected(View v, int index);
+    private SelecteUtil.Onselecte listener;
+
+    public SelecteUtil setOnselecte(SelecteUtil.Onselecte listener) {
+        this.listener = listener;
+        return slu;
     }
 
 
@@ -130,6 +146,7 @@ public class SelectBar extends LinearLayout {
         return (int) (spValue * fontScale + 0.5f);
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public SelectBar addText(String text, float ts, int tc, Drawable line, boolean visiable, boolean isLongLine, boolean isBottomTab) {
         if (text != null) {
@@ -149,15 +166,18 @@ public class SelectBar extends LinearLayout {
             img.setId(id++);
 
 
-            if (isBottomTab){
+            if (isBottomTab) {
                 linelp = new LayoutParams(dip2px(22), dip2px(22));
+                linelp.setMargins(0, 5, 0, 0);
                 itemlp = new LayoutParams(0, sp2px(44), 1);
                 llp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 textlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
                 textlp.setMargins(dip2px(5), 0, dip2px(5), 0);
                 ll.addView(img, linelp);
                 ll.addView(tv, textlp);
-            } else  if (llp == null) {
+            } else {
+
+
                 if (line != null) {
                     img.setBackground(line);
                 } else {
@@ -165,16 +185,18 @@ public class SelectBar extends LinearLayout {
                 }
                 if (!visiable)
                     img.setVisibility(INVISIBLE);
-                linelp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(2));
-                if (isLongLine) {
-                    itemlp = new LayoutParams(0, sp2px(44), 1);
-                    llp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    textlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-                    textlp.setMargins(dip2px(5), 0, dip2px(5), 0);
-                } else {
-                    itemlp = new LayoutParams(0, sp2px(44), 1);
-                    llp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    textlp = new LayoutParams(sp2px(56), ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                if (llp == null) {
+                    linelp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(2));
+                    if (isLongLine) {
+                        itemlp = new LayoutParams(0, sp2px(44), 1);
+                        llp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                        textlp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                        textlp.setMargins(dip2px(5), 0, dip2px(5), 0);
+                    } else {
+                        itemlp = new LayoutParams(0, sp2px(44), 1);
+                        llp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                        textlp = new LayoutParams(sp2px(56), ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                    }
                 }
                 ll.addView(tv, textlp);
                 ll.addView(img, linelp);

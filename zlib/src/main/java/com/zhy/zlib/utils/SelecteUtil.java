@@ -121,7 +121,7 @@ public class SelecteUtil implements View.OnClickListener, ViewPager.OnPageChange
                 }
                 tvs2.get(index).setTextColor(cloSelected);
             }
-            if (imgs.size() > 0) {
+            if (imgs.size() > 0&&imgIdsUnSelected!=null) {
                 for (int i = 0; i < imgs.size(); i++) {
                     imgs.get(i).setImageResource(imgIdsUnSelected.get(i));
                 }
